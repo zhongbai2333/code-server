@@ -25,9 +25,14 @@ endef
 
 define Build/Compile
 	cd $(PKG_BUILD_DIR) && \
-	npm install --unsafe-perm && \
+	# 清理缓存与锁文件后，仅安装 production 依赖
+	npm cache clean --force && \
+	npm cache verify && \
+	rm -rf node_modules package-lock.json npm-shrinkwrap.json && \
+	npm ci --only=production --unsafe-perm && \
 	npm run build
 endef
+
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib/code-server
