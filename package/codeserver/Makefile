@@ -25,7 +25,6 @@ endef
 
 define Build/Compile
 	cd $(PKG_BUILD_DIR) && \
-	# 清理缓存与锁文件后，仅安装 production 依赖
 	npm cache clean --force && \
 	npm cache verify && \
 	rm -rf node_modules package-lock.json npm-shrinkwrap.json && \
