@@ -16,16 +16,17 @@ define Package/$(PKG_NAME)
 	CATEGORY:=Development
 	TITLE:=code-server Web IDE
 	MENU:=1
-	DEPENDS:=+node
+	DEPENDS:=+node +node-npm
 endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
-	# 可在此处应用 patches
 endef
 
 define Build/Compile
-	cd $(PKG_BUILD_DIR) && npm install --unsafe-perm && npm run build
+	cd $(PKG_BUILD_DIR) && \
+	npm install --unsafe-perm && \
+	npm run build
 endef
 
 define Package/$(PKG_NAME)/install
