@@ -15,6 +15,7 @@ define Package/$(PKG_NAME)
   SECTION:=lang
   CATEGORY:=Development
   TITLE:=code-server Web IDE
+  MENU:=1
   DEPENDS:=+node
 endef
 
