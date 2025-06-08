@@ -12,26 +12,26 @@ PKG_SOURCE_VERSION:=409c64e0df4d53530e59c16acc2b5d5766f717b0
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
-  SECTION:=lang
-  CATEGORY:=Development
-  TITLE:=code-server Web IDE
-  MENU:=1
-  DEPENDS:=+node
+	SECTION:=lang
+	CATEGORY:=Development
+	TITLE:=code-server Web IDE
+	MENU:=1
+	DEPENDS:=+node
 endef
 
 define Build/Prepare
-  $(call Build/Prepare/Default)
-  # 可在此处应用 patches
+	$(call Build/Prepare/Default)
+	# 可在此处应用 patches
 endef
 
 define Build/Compile
-  cd $(PKG_BUILD_DIR) && npm install --unsafe-perm && npm run build
+	cd $(PKG_BUILD_DIR) && npm install --unsafe-perm && npm run build
 endef
 
 define Package/$(PKG_NAME)/install
-  $(INSTALL_DIR) $(1)/usr/lib/code-server
-  $(CP) $(PKG_BUILD_DIR)/out/* $(1)/usr/lib/code-server/
-  $(INSTALL_BIN) $(PKG_BUILD_DIR)/out/bin/code-server $(1)/usr/bin/code-server
+	$(INSTALL_DIR) $(1)/usr/lib/code-server
+	$(CP) $(PKG_BUILD_DIR)/out/* $(1)/usr/lib/code-server/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/out/bin/code-server $(1)/usr/bin/code-server
 endef
 
 $(eval $(call BuildPackage,$(PKG_NAME)))
